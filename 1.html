@@ -11,10 +11,17 @@
 <body>
 <section id="app">
     <button @click="onClick">{{name}}</button>
+    <my-div></my-div>
 </section>
 <script>
+    let v = {
+        template:`<div>child</div>`
+    }
     let VM = new Vue({
         el: '#app',
+        components:{
+          'my-div': v
+        },
         data() {
             return {
                 name: 'alice'
