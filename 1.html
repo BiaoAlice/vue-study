@@ -11,25 +11,50 @@
 <body>
 <section id="app">
     <button @click="onClick">{{name}}</button>
-    <my-div></my-div>
+    <my-div :name="name" @change-name="changeName"></my-div>
 </section>
 <script>
     let v = {
-        template:`<div>child</div>`
+        props: {
+            name: {
+                type: String
+            }
+        },
+        data() {
+            return {
+                obj: {
+                    name: 'new',
+                    old: '123'
+                }
+            }
+        },
+        methods: {
+            changeName() {
+                console.log(123);
+                this.$emit('change-name', this.obj)
+            }
+        },
+        template: `<div> {{name}}----child
+                    <button @click="changeName">click</button>
+                </div>`
     }
     let VM = new Vue({
         el: '#app',
-        components:{
-          'my-div': v
+        components: {
+            'my-div': v
         },
         data() {
             return {
                 name: 'alice'
             }
         },
-        methods:{
+        methods: {
             onClick() {
                 alert('onclick');
+            },
+            changeName(name) {
+                console.log(name);
+                this.name = name.name;
             }
         }
     })
