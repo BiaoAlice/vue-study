@@ -11,7 +11,10 @@
 <body>
 <section id="app">
     <button @click="onClick">{{name}}</button>
-    <my-div :name="name" @change-name="changeName"></my-div>
+    <my-div :name="name" @change-name="changeName">
+        hellow
+        <p slot="slot1">123123</p>
+    </my-div>
 </section>
 <script>
     let v = {
@@ -36,6 +39,8 @@
         },
         template: `<div> {{name}}----child
                     <button @click="changeName">click</button>
+                    <slot name="slot1"></slot>
+                    <slot></slot>
                 </div>`
     }
     let VM = new Vue({
